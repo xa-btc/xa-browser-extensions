@@ -1,6 +1,12 @@
 # Files distributed with XA Translation.
 *
 !/.gitignore
+!/README.md
+!/docs/
+!/docs/screenshots/
+!/docs/screenshots/garden-english.png
+!/docs/screenshots/garden-spanish.png
+!/docs/screenshots/popup.png
 !/extension/
 !/extension/icons/
 !/extension/ocr/
