@@ -2,3 +2,15 @@
 !/.gitignore
 !/LICENSE
 !/README.md
+
+# Each extension maintains its own file allowlist.
+!/XA Extension Observation/
+!/XA Image/
+!/XA Netflix Ad Skipper/
+!/XA Paramount/
+!/XA Refresh/
+!/XA Snap/
+!/XA Text Multi Search/
+!/XA Translation/
+!/XA Volume/
+!/XA Wallet Maintainer/

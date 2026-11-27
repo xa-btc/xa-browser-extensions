@@ -1,0 +1,1 @@
+{"name":"xa-snap","version":"0.1.0","private":true,"scripts":{"test":"python -m unittest discover -s tests -p test_*.py"}}

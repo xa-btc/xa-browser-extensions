@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XA Snap</title><link rel="icon" type="image/png" href="icons/32.png"><link rel="stylesheet" href="style.css"></head>
+<body class="popup">
+<header class="brand"><span class="mark" aria-hidden="true"></span><strong>XA Snap</strong><a href="studio.html#settings" target="_blank">Settings</a></header>
+<main>
+  <div class="primary-captures">
+    <button data-mode="full">Full page <kbd>Alt Shift 1</kbd></button>
+    <button data-mode="visible">Visible tab <kbd>Alt Shift 3</kbd></button>
+    <button data-mode="selection">Select region <kbd>Alt Shift 4</kbd></button>
+    <button data-mode="element">Select element</button>
+  </div>
+  <div class="secondary-captures">
+    <button data-mode="last">Repeat last</button><button id="tabs">All tabs</button>
+    <a href="studio.html#batch" target="_blank">URL batch</a><a href="studio.html#window" target="_blank">Window</a>
+  </div>
+  <p id="status" role="status" hidden></p><button id="stop" hidden>Cancel capture</button>
+</main>
+<footer><a href="studio.html#history" target="_blank">Capture history</a><a href="studio.html#import" target="_blank">Import image</a></footer>
+<script type="module" src="popup.mjs"></script>
+</body></html>
+

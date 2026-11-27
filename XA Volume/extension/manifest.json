@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "XA Volume",
+  "version": "1.0.0",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_title": "XA Volume",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'"
+  },
+  "description": "Adjust, boost, or mute individual tabs with local audio controls.",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "activeTab",
+    "tabCapture",
+    "tabs",
+    "storage",
+    "offscreen",
+    "webNavigation"
+  ],
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "options_page": "options.html",
+  "commands": {
+    "up": {
+      "suggested_key": {
+        "default": "Alt+Shift+Up"
+      },
+      "description": "Increase tab volume"
+    },
+    "down": {
+      "suggested_key": {
+        "default": "Alt+Shift+Down"
+      },
+      "description": "Decrease tab volume"
+    },
+    "mute": {
+      "suggested_key": {
+        "default": "Alt+Shift+M"
+      },
+      "description": "Toggle tab mute"
+    }
+  }
+}

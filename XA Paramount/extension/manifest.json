@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "XA Paramount Quality",
+  "version": "1.0.0",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_title": "XA Paramount Quality",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'"
+  },
+  "description": "Choose the video resolution offered by Paramount+ and see the current playback dimensions.",
+  "minimum_chrome_version": "111",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "badge.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.paramountplus.com/*"
+      ],
+      "js": [
+        "playback.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.paramountplus.com/*"
+      ],
+      "js": [
+        "controller.js"
+      ],
+      "world": "ISOLATED",
+      "run_at": "document_start"
+    }
+  ]
+}

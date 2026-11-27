@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "XA Wallet Maintainer",
+  "version": "1.0.0",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_title": "XA Wallet Maintainer",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src https://ethereum-rpc.publicnode.com https://base-rpc.publicnode.com https://arbitrum-one-rpc.publicnode.com https://polygon-bor-rpc.publicnode.com https://eth.blockscout.com https://base.blockscout.com https://arbitrum.blockscout.com https://polygon.blockscout.com https://api.mainnet-beta.solana.com; object-src 'none'; base-uri 'none'"
+  },
+  "description": "Manage public accounts, discover addresses and review wallet-signed consolidations.",
+  "minimum_chrome_version": "125",
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://ethereum-rpc.publicnode.com/*",
+    "https://base-rpc.publicnode.com/*",
+    "https://arbitrum-one-rpc.publicnode.com/*",
+    "https://polygon-bor-rpc.publicnode.com/*",
+    "https://eth.blockscout.com/*",
+    "https://base.blockscout.com/*",
+    "https://arbitrum.blockscout.com/*",
+    "https://polygon.blockscout.com/*",
+    "https://api.mainnet-beta.solana.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://127.0.0.1/*"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuyhHiZUh9Y9t4cxeihih+H8Haa/66brj1KdqJFQr8pxsec4LaggY69fuZkbWeTYBu80NQobV28oTxQmEdi0UMPkpW0wUOocpSwngUMhTUOvTxHjSvJPAHhQTKrh059nExD99+YOxIhxfrK/gKV8wuL9K90Ar495+jghbyj7v+Fgek9KM+H/P/doWgCBvJKB9n5aH4aAYjBDNHyeP16bjzMxgc1Md40oApquUG+miFOStxFDgH24+nx5azpthbP9A5STfoleGS6mxf23IgBU0EOQkRlqB1FBH5o+31XsmK6Lv84SQA7Tt7VUtufz3PzMgpTva5ftLT8/UeTnfHAMZDQIDAQAB"
+}

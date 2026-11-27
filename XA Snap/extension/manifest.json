@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "XA Snap",
+  "version": "0.1.0",
+  "minimum_chrome_version": "116",
+  "description": "Capture, annotate, and export screenshots and PDFs locally.",
+  "offline_enabled": true,
+  "incognito": "not_allowed",
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "XA Snap",
+    "default_icon": { "16": "icons/16.png", "32": "icons/32.png" }
+  },
+  "background": { "service_worker": "worker.mjs", "type": "module" },
+  "options_ui": { "page": "studio.html#settings", "open_in_tab": true },
+  "permissions": ["activeTab", "scripting", "storage", "downloads", "downloads.open", "contextMenus", "unlimitedStorage", "clipboardWrite"],
+  "optional_host_permissions": ["<all_urls>"],
+  "optional_permissions": ["desktopCapture"],
+  "content_security_policy": {
+    "extension_pages": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; object-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self' blob:"
+  },
+  "commands": {
+    "full": { "description": "Capture the full page", "suggested_key": { "default": "Alt+Shift+1" } },
+    "visible": { "description": "Capture the visible tab", "suggested_key": { "default": "Alt+Shift+3" } },
+    "selection": { "description": "Capture a selected region", "suggested_key": { "default": "Alt+Shift+4" } },
+    "last": { "description": "Repeat last capture", "suggested_key": { "default": "Ctrl+Shift+S" } }
+  }
+}

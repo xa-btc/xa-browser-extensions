@@ -1,0 +1,115 @@
+{
+  "manifest_version": 3,
+  "name": "XA Netflix Ad Skipper",
+  "version": "1.1.1",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_title": "XA Netflix Ad Skipper",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'"
+  },
+  "description": "Automatically handle Netflix playback prompts and fast-forward detected ad breaks.",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.netflix.com/*",
+        "https://*.netflix.co.uk/*",
+        "https://*.netflix.ar/*",
+        "https://*.netflix.au/*",
+        "https://*.netflix.br/*",
+        "https://*.netflix.ca/*",
+        "https://*.netflix.fr/*",
+        "https://*.netflix.de/*",
+        "https://*.netflix.cz/*",
+        "https://*.netflix.hk/*",
+        "https://*.netflix.in/*",
+        "https://*.netflix.jp/*",
+        "https://*.netflix.lt/*",
+        "https://*.netflix.no/*",
+        "https://*.netflix.nl/*",
+        "https://*.netflix.pl/*",
+        "https://*.netflix.ru/*",
+        "https://*.netflix.sg/*",
+        "https://*.netflix.sk/*",
+        "https://*.netflix.es/*"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start",
+      "js": [
+        "quality.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.netflix.com/*",
+        "https://*.netflix.co.uk/*",
+        "https://*.netflix.ar/*",
+        "https://*.netflix.au/*",
+        "https://*.netflix.br/*",
+        "https://*.netflix.ca/*",
+        "https://*.netflix.fr/*",
+        "https://*.netflix.de/*",
+        "https://*.netflix.cz/*",
+        "https://*.netflix.hk/*",
+        "https://*.netflix.in/*",
+        "https://*.netflix.jp/*",
+        "https://*.netflix.lt/*",
+        "https://*.netflix.no/*",
+        "https://*.netflix.nl/*",
+        "https://*.netflix.pl/*",
+        "https://*.netflix.ru/*",
+        "https://*.netflix.sg/*",
+        "https://*.netflix.sk/*",
+        "https://*.netflix.es/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "quality-settings.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.netflix.com/*",
+        "https://*.netflix.co.uk/*",
+        "https://*.netflix.ar/*",
+        "https://*.netflix.au/*",
+        "https://*.netflix.br/*",
+        "https://*.netflix.ca/*",
+        "https://*.netflix.fr/*",
+        "https://*.netflix.de/*",
+        "https://*.netflix.cz/*",
+        "https://*.netflix.hk/*",
+        "https://*.netflix.in/*",
+        "https://*.netflix.jp/*",
+        "https://*.netflix.lt/*",
+        "https://*.netflix.no/*",
+        "https://*.netflix.nl/*",
+        "https://*.netflix.pl/*",
+        "https://*.netflix.ru/*",
+        "https://*.netflix.sg/*",
+        "https://*.netflix.sk/*",
+        "https://*.netflix.es/*"
+      ],
+      "js": [
+        "settings.js",
+        "player.js"
+      ]
+    }
+  ]
+}

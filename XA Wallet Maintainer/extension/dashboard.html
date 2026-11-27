@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XA Wallet Maintainer</title><link rel="icon" href="icons/32.png"><link rel="stylesheet" href="style.css"></head><body><main>
+
+<header><img alt="" src="icons/48.png"><h1>XA Wallet Maintainer</h1><button id="connect">Connect wallet</button></header>
+
+<details id="importBox" open><summary>Import public accounts</summary><label>Wallet label <input id="label" placeholder="e.g. Rabby trading"></label><label>Public addresses <textarea id="addresses" rows="3" placeholder="One EVM or Solana public address per line"></textarea></label><button id="add">Import addresses</button></details>
+
+<details><summary>Discover derived EVM accounts</summary><p>Enter an Ethereum account xpub or external-chain xpub. XA Wallet Maintainer derives indexes 0–99 locally. Scan candidates to check usage, then import the addresses you want to track.</p><input id="xpub" placeholder="xpub…" spellcheck="false"><button id="derive">Derive 100 addresses</button><section id="discovery" hidden><div class="tools"><select id="dchain" aria-label="Discovery network"></select><button id="dscan">Scan candidates</button><button id="dused">Select used</button><button id="dall">Select all</button><button id="dimport">Import selected</button></div><div id="candidates"></div></section></details>
+
+<details><summary>Track an ERC-20 contract</summary><p>Add a token for direct balance checks when it is missing from the public index.</p><label>Network <select id="tchain"></select></label><label>Contract address <input id="contract" placeholder="0x…"></label><label>Display label <input id="ticker" placeholder="Token symbol"></label><button id="track">Save tracked token</button><div id="tracked"></div></details>
+
+<section><h2>Portfolio</h2><div class="tools"><input type="search" id="filter" placeholder="Filter by wallet label or address" aria-label="Filter portfolio"><select id="network" aria-label="Network"></select><button id="scan">Refresh balances &amp; activity</button><button id="cancel" hidden>Stop scan</button><label><input type="checkbox" id="hide"> Hide empty</label><label><input type="checkbox" id="used"> Previously used only</label></div><p id="progress" role="status"></p><p id="totals"></p><div id="portfolio"></div></section>
+
+<section><h2>Consolidation</h2><p>Select funded assets on one network. Each source wallet approves its own transfers. Token transfers are queued before native balances.</p><div class="tools"><button id="select">Select visible assets</button><button id="none">Clear selection</button></div><label>Transfer amount <select id="amountMode"><option value="sweep">Full transferable balance</option><option value="fixed">Fixed amount of one asset from each source</option></select></label><label id="fixedLabel" hidden>Amount per source <input id="fixed" placeholder="0.00" inputmode="decimal"></label><datalist id="known"></datalist><label>Destination on the selected network <input list="known" id="destination" autocomplete="off" placeholder="Public wallet address"></label><button id="plan">Review selected transfers</button><p id="selection"></p></section>
+
+<section><h2>Transaction activity</h2><button id="check">Check confirmations</button><div id="activity"></div></section><output id="notice" aria-live="polite"></output>
+
+<footer>Public addresses and labels are stored in this Brave profile. Refreshing queries PublicNode, Blockscout or Solana RPC. To connect or sign, launch <code>Start Wallet Connector.cmd</code> from the project folder.</footer></main><script src="dashboard.js"></script></body></html>
+

@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XA Text Multi Search · Settings</title><link rel="icon" href="icons/32.png"><link rel="stylesheet" href="settings.css"></head>
+<body><main><header><img src="icons/48.png" width="40" height="40" alt=""><h1>XA Text Multi Search</h1></header>
+<p id="unavailable" hidden>This page does not allow the search panel. Open a regular webpage and reload it if it was already open when you installed the extension.</p>
+<form id="preferences"><section><h2>Search</h2><div id="search"></div></section>
+<section><h2>Appearance and navigation</h2><div id="display"></div></section>
+<section><h2>Panel</h2><div id="panel"></div><details><summary>Visible controls</summary><div id="controls"></div></details></section>
+<section><h2>Site rules</h2><div id="sites"></div><label>Addresses or hostnames, one per line<textarea name="patterns" rows="4" placeholder="*.example.com"></textarea></label><p>* matches any sequence. ? matches one character.</p></section>
+<section class="wide"><h2>Highlight palette</h2><p>Set the background and text colors for each theme. Search expressions cycle through these pairs in order.</p><div id="palette"></div>
+<div class="actions"><button type="button" id="add">Add pair</button><button type="button" id="defaultPalette">Default colors</button><button type="button" id="load">Import palette</button><button type="button" id="save">Export palette</button><input type="file" id="paletteFile" accept=".json" hidden></div></section>
+<div class="actions wide"><button class="primary">Save settings</button><button type="button" id="defaults">Restore defaults in form</button><output role="status" id="status"></output></div>
+</form><p>Keyboard shortcuts are configurable at <code>brave://extensions/shortcuts</code>. Press Ctrl+Shift+F to open the panel when the shortcut is assigned.</p></main><script src="model.js"></script><script src="settings.js"></script></body></html>

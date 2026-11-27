@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>XA Extension Observation</title>
+  <link rel="icon" href="icons/32.png">
+  <link rel="stylesheet" href="dashboard.css">
+  <script type="module" src="dashboard.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><img class="brand-symbol" src="icons/48.png" width="32" height="32" alt=""><div>XA OBSERVATION<small>EXTENSION TERMINAL</small></div></div>
+    <div class="profile-label"><span class="status-dot"></span> LOCAL BRAVE PROFILE</div>
+    <nav aria-label="Main navigation">
+      <button data-view="inventory" class="nav-button selected"><span aria-hidden="true">▦</span> Extensions <span id="nav-count" class="nav-count">—</span></button>
+      <button data-view="activity" class="nav-button"><span aria-hidden="true">≋</span> Activity log</button>
+      <button data-view="runtime" class="nav-button"><span aria-hidden="true">⌁</span> Runtime calls</button>
+      <button data-view="diagnostics" class="nav-button"><span aria-hidden="true">△</span> Browser diagnostics</button>
+      <button data-view="coverage" class="nav-button"><span aria-hidden="true">◎</span> Coverage & imports</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="eyebrow">YOUR DATA STAYS HERE</div>
+      <p>Stored in this browser profile.<br>No server. No account. No uploads.</p>
+      <button id="open-settings" class="quiet-button">Open Brave extensions ↗</button>
+      <small>XO / 0.2.0</small>
+    </div>
+  </aside>
+  <main>
+    <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong id="view-name">Extensions</strong></div><div class="monitor-status"><span id="monitor-dot" class="status-dot"></span><span id="monitor-status">Connecting</span></div></header>
+    <div class="workspace">
+      <div class="heading-row"><div><div class="eyebrow">KNOW WHAT HAS ACCESS</div><h1 id="page-title">Extension overview</h1><p id="page-subtitle">Permissions, changes, and declarations across your browser.</p></div><div class="toolbar"><button id="refresh" title="Reconcile inventory now">↻ Refresh</button><button id="pause">Pause monitoring</button><button id="export" class="primary">↓ Export JSON</button></div></div>
+      <div id="notice" class="notice" role="status" hidden></div>
+      <div class="stats" aria-label="Profile summary">
+        <div class="stat"><span>INSTALLED</span><strong id="stat-installed">—</strong><small>Other extensions in this profile</small></div>
+        <div class="stat"><span>ENABLED</span><strong id="stat-enabled">—</strong><small>Enabled state, not runtime activity</small></div>
+        <div class="stat"><span>BROAD HOST ACCESS</span><strong id="stat-broad">—</strong><small>Enabled with broad host patterns</small></div>
+        <div class="stat"><span>RETAINED EVENTS</span><strong id="stat-events">—</strong><small id="retention-label">Local lifecycle & snapshot history</small></div>
+      </div>
+      <div id="inventory-view" class="view">
+        <div class="coverage-note"><span class="tag">OBSERVABLE DATA</span> Inventory and lifecycle monitoring. Connect the optional local companion for browser-logged API calls. <button id="show-coverage" class="text-button">View coverage ↗</button></div>
+        <div class="inventory-layout">
+          <section class="panel inventory-panel" aria-label="Extension inventory">
+            <div class="panel-heading"><h2>Extensions <span id="visible-count" class="muted"></span></h2><span class="eyebrow">AUTO REFRESH / 60S</span></div>
+            <div class="filters"><input type="search" id="extension-search" placeholder="Search name, ID, permission, or host…" aria-label="Search extensions"><div class="filter-row"><select id="state-filter" aria-label="Extension state"><option value="enabled">Enabled extensions</option><option value="all">All extensions</option><option value="disabled">Disabled extensions</option></select><label><input type="checkbox" id="sensitive-filter"> Notable access</label></div></div>
+            <div class="list-head"><span>EXTENSION / VERSION</span><span>ACCESS</span></div>
+            <div id="extension-list" class="extension-list"></div>
+          </section>
+          <section class="panel detail-panel" aria-label="Selected extension details">
+            <div id="extension-detail"><div class="empty"><span class="empty-icon">◎</span><h3>Waiting for inventory</h3><p>The monitor will read this profile’s installed extensions.</p></div></div>
+          </section>
+        </div>
+      </div>
+      <section id="activity-view" class="view panel" hidden>
+        <div class="panel-heading"><div><h2>Observed activity</h2><p>Newest first. Snapshot times describe observation, not exact execution.</p></div><button id="clear-history">Clear history</button></div>
+        <div class="activity-filters"><input type="search" id="event-search" placeholder="Search extension, event, or change details…" aria-label="Search activity"><select id="event-kind" aria-label="Activity kind"><option value="all">All event types</option><option value="changed">Snapshot changes</option><option value="installed">Installed</option><option value="enabled">Enabled</option><option value="disabled">Disabled</option><option value="uninstalled">Uninstalled</option><option value="discovered">Discovered</option><option value="removed">Removed</option><option value="monitor">Monitor events</option></select></div>
+        <div id="event-summary" class="event-summary muted"></div><div id="event-list" class="event-list"></div>
+      </section>
+      <section id="runtime-view" class="view" hidden>
+        <div class="panel">
+          <div class="panel-heading"><div><h2>Browser-logged runtime calls</h2><p id="runtime-status">Local companion is disconnected.</p></div><span class="tag amber">DIAGNOSTIC CAPTURE</span></div>
+          <div class="runtime-controls"><div class="button-row"><button id="connect-runtime" class="primary">Connect runtime log</button><button id="disconnect-runtime">Disconnect</button><button id="clear-runtime">Clear retained calls</button><label><input type="checkbox" id="runtime-details"> Include API arguments & URLs</label></div><p>Collection begins at the end of the log on each connection. Brave emits only supported diagnostic events; missing records do not prove inactivity. This is not a complete network capture.</p><p>Brave’s source log can contain sensitive URLs and API arguments even when the details checkbox is off. Logging continues until Brave is fully exited and launched normally. A shared process log cannot distinguish identical extension IDs across open profiles.</p></div>
+          <div class="activity-filters"><input type="search" id="runtime-search" placeholder="Search extension, API, category, or captured details…" aria-label="Search runtime calls"><select id="runtime-kind" aria-label="Runtime category"><option value="all">All runtime categories</option><option value="api_call">API calls</option><option value="api_event_callback">API events / commands</option><option value="content_script">Content scripts</option><option value="dom_access">DOM access</option><option value="dom_event">DOM events</option><option value="webrequest">Web request activity</option></select></div><div id="runtime-summary" class="event-summary muted"></div><div id="runtime-list" class="event-list"></div>
+        </div>
+        <details class="panel runtime-setup" open><summary>One-time Windows companion setup</summary><p>The optional companion needs Node.js 20.11+. In the project folder, run the following PowerShell command using this monitor’s ID:</p><pre id="register-command"></pre><p>Then exit Brave fully and run <code>.\native\Start-BraveLogging.ps1</code>. Reopen Observatory and click <strong>Connect runtime log</strong>. The browser will request the optional native messaging permission. Setup does not change other extensions.</p><p>Use <code>-ProfileDirectory 'Profile 1'</code> with the launch script for another profile. The source log is stored in <code>native\runtime-logs</code>; the browser’s diagnostic database can also grow while logging is enabled. See README for shutdown and cleanup instructions.</p></details>
+      </section>
+      <section id="diagnostics-view" class="view" hidden>
+        <section class="panel">
+          <div class="panel-heading"><div><h2>Errors & unexpected refreshes</h2><p id="diagnostic-status">Navigation monitoring is off.</p></div><button id="diagnostic-enable" class="primary">Enable diagnostics</button></div>
+          <div class="runtime-controls"><p>Enable the browser-wide navigation timeline, then select a problem tab for detailed errors, request failures, and reload initiators. Records survive page reloads. No companion is required for tab capture.</p><div class="diagnostic-tab-controls"><select id="diagnostic-target" aria-label="Tab to capture"><option value="">Enable diagnostics to list tabs</option></select><button id="diagnostic-refresh-tabs">Refresh tabs</button><button id="diagnostic-attach">Capture selected tab</button><button id="diagnostic-detach">Stop selected capture</button></div><div id="diagnostic-captures" class="chips"></div><p class="muted">Capture uses Brave’s debugging permission and banner, can affect timing, and may be interrupted by DevTools. At most five normal HTTP/HTTPS tabs can be captured. Separately running frames/workers and browser UI are not fully covered. Pausing stops captures; reattach explicitly after resuming.</p><div class="button-row"><button id="diagnostic-reload">Reload selected tab</button><button id="diagnostic-hard-reload">Reload bypassing cache</button><button id="diagnostic-clear">Clear diagnostic history</button></div><p class="muted">Reload buttons immediately reload the selected tab and may discard unsaved page input. Otherwise this monitor never reloads a page. Normal versus hard reload cannot be inferred from a generic reload event.</p><p class="muted">Structured URLs omit credentials, query strings and fragments. Console text, exception messages and native process logs can contain sensitive data. Records stay local and are included in JSON export. Enable diagnostics and connect Runtime calls to also collect browser-process warnings/errors from the companion.</p></div>
+          <div class="diagnostic-stats"><span id="diagnostic-errors">0 errors / warnings</span><span id="diagnostic-reloads">0 observed reloads</span><span id="diagnostic-total">0 retained records</span></div>
+          <div class="activity-filters"><input id="diagnostic-search" type="search" placeholder="Search error, host, tab ID, reason, or source…" aria-label="Search diagnostics"><select id="diagnostic-kind" aria-label="Diagnostic category"><option value="all">All diagnostics</option><option value="errors">Errors & warnings</option><option value="reload">Reloads</option><option value="navigation">Navigation & document requests</option><option value="network">Network / WebSocket</option><option value="browser-process">Browser process log</option><option value="capture">Capture status</option></select><select id="diagnostic-tab-filter" aria-label="Filter diagnostics by tab"><option value="all">All tabs / browser process</option><option value="process">Browser process only</option></select></div>
+          <div id="diagnostic-summary" class="event-summary muted"></div><div id="diagnostic-list" class="event-list"></div>
+        </section>
+      </section>
+      <section id="coverage-view" class="view" hidden>
+        <div class="panel"><div class="panel-heading"><div><h2>Visibility, without guesswork</h2><p>A permission is a capability. It is not evidence that an extension used it.</p></div><span class="tag amber">PARTIAL TELEMETRY</span></div><div id="coverage-list"></div></div>
+        <div class="import-grid">
+          <section class="panel import-panel"><div class="eyebrow">STATIC DECLARATIONS</div><h2>Import extension manifests</h2><p>Add declared commands, suggested Windows shortcuts, content scripts, optional permissions, and background entry points.</p><p>Choose your Brave profile’s <code>Extensions</code> folder for a bulk import. Only matching <code>manifest.json</code> files are read. Files must match an installed extension ID and version.</p><div class="button-row"><button id="import-folder" class="primary">Choose Extensions folder</button><button id="remove-imports">Remove imports</button></div><p class="muted">Default Windows location: <code>%LOCALAPPDATA%\BraveSoftware\Brave-Browser\User Data\Default\Extensions</code>. For another profile, find its Profile Path at <code>brave://version</code>.</p><p class="muted">For an unpacked extension, select it in the inventory and use “Import manifest” in its Commands tab. Imports are static; reimport after an update or a same-version source change.</p><input type="file" id="folder-input" webkitdirectory multiple hidden><input type="file" id="manifest-input" accept=".json,application/json" hidden><div id="import-result" role="status"></div></section>
+          <section class="panel import-panel"><div class="eyebrow">MONITOR DESIGN</div><h2>Local by default</h2><ul class="plain-list"><li><strong>management</strong><span>Reads extension inventory and lifecycle events. The API permission also allows management; this application has no enable, disable, or uninstall actions.</span></li><li><strong>storage</strong><span>Keeps inventory, imports, up to 2,000 lifecycle events / 3 MB and 1,000 runtime events / 2 MB, plus 1,000 diagnostic records / 1 MB. Oldest records are discarded at either limit.</span></li><li><strong>alarms</strong><span>Reconciles inventory approximately every minute while Brave is running. Browser scheduling can delay scans.</span></li><li><strong>nativeMessaging</strong><span>Optional permission requested when you connect the local diagnostic log companion.</span></li><li><strong>tabs / navigation</strong><span>Optional permissions for tab selection and the navigation timeline.</span></li><li><strong>debugger</strong><span>Declared at installation. Detailed capture starts when you select a tab and click Capture selected tab.</span></li></ul><p class="muted">No host access, injected content scripts, traffic interception, remote code, or analytics. Exported JSON includes retained runtime records and captured arguments when enabled.</p><button id="open-shortcuts">Open Brave keyboard shortcuts ↗</button></section>
+        </div>
+      </section>
+      <section class="terminal panel" aria-label="Monitor command terminal">
+        <div class="terminal-heading"><span><span class="status-dot"></span> MONITOR CONSOLE</span><button id="terminal-help" class="text-button">help</button></div>
+        <pre id="terminal-output" aria-live="polite">XA Extension Observation — local inspection console.
+Type help for commands. This console does not execute shell commands or other extensions’ commands.</pre>
+        <form id="terminal-form"><label for="terminal-input">observatory <span>›</span></label><input id="terminal-input" autocomplete="off" spellcheck="false" placeholder="help, list, inspect &lt;name or id&gt;, refresh…" aria-label="Terminal command"><button type="submit" aria-label="Run terminal command">↵</button></form>
+      </section>
+      <footer><span id="scan-status">Waiting for first inventory scan</span><span>LOCAL STORAGE <span class="footer-dot">·</span> PUBLIC EXTENSION APIs</span></footer>
+    </div>
+  </main>
+  <dialog id="confirm-dialog"><form method="dialog"><h2 id="confirm-title">Clear history?</h2><p id="confirm-description"></p><div class="button-row"><button value="cancel">Cancel</button><button value="confirm" class="danger">Confirm</button></div></form></dialog>
+</body>
+</html>

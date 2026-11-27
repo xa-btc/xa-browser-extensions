@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>XA Netflix Ad Skipper</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="settings.js"></script>
+  <script defer src="popup.js"></script>
+</head>
+<body>
+  <header><img src="icons/32.png" width="32" height="32" alt=""><h1>XA Netflix Ad Skipper</h1></header>
+  <fieldset disabled aria-label="Netflix playback preferences">
+    <label>Skip intros<input type="checkbox" id="intro"></label>
+    <label>Skip recaps<input type="checkbox" id="recap"></label>
+    <label>Play next episode<input type="checkbox" id="next"></label>
+    <label>Continue watching<input type="checkbox" id="resume"></label>
+    <label><span>Skip ads<small>Fast-forward timed ads and play the ending</small></span><input type="checkbox" id="ads"></label>
+    <label for="quality">Stream quality
+      <select id="quality">
+        <option value="auto">Auto</option>
+        <option value="480">480p</option>
+        <option value="720">720p</option>
+        <option value="1080">1080p</option>
+        <option value="2160">2160p</option>
+        <option value="highest">Highest available</option>
+      </select>
+    </label>
+    <small>Changing quality reloads the active Netflix title.</small>
+    <small id="playing" aria-live="polite"></small>
+  </fieldset>
+</body>
+</html>
